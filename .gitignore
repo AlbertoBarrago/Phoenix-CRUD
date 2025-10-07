@@ -35,3 +35,6 @@ simple_crud-*.tar
 npm-debug.log
 /assets/node_modules/
 
+# IDE
+.idea
+
