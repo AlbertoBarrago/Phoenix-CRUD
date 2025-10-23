@@ -3,9 +3,9 @@ defmodule SimpleCrudWeb.ProductControllerTest do
 
   import SimpleCrud.CatalogFixtures
 
-  @create_attrs %{name: "some name", description: "some description", price: "120.5", quantity: 42}
-  @update_attrs %{name: "some updated name", description: "some updated description", price: "456.7", quantity: 43}
-  @invalid_attrs %{name: nil, description: nil, price: nil, quantity: nil}
+  @create_attrs %{name: "some name", description: "some description", price: "120.5", quantity: 42, category: "TEST", in_stock: true}
+  @update_attrs %{name: "some updated name", description: "some updated description", price: "456.7", quantity: 43, category: "TEST_UPDATE", in_stock: false}
+  @invalid_attrs %{name: nil, description: nil, price: nil, quantity: nil,  category: nil , in_stock: nil }
 
   describe "index" do
     test "lists all products", %{conn: conn} do

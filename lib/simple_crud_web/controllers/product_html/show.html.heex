@@ -17,5 +17,8 @@
     <:item title="Description">{@product.description}</:item>
     <:item title="Price">{@product.price}</:item>
     <:item title="Quantity">{@product.quantity}</:item>
+    <:item title="In Stock">{@product.in_stock && "YES" || "NO"}</:item>
+    <:item title="Created at">{@product.inserted_at}</:item>
+    <:item title="Updated at">{@product.updated_at}</:item>
   </.list>
 </Layouts.app>

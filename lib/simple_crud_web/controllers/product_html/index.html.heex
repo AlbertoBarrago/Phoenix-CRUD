@@ -13,6 +13,9 @@
     <:col :let={product} label="Description">{product.description}</:col>
     <:col :let={product} label="Price">{product.price}</:col>
     <:col :let={product} label="Quantity">{product.quantity}</:col>
+    <:col :let={product} label="Category">{product.category}</:col>
+    <:col :let={product} label="In Stock">{product.in_stock}</:col>
+
     <:action :let={product}>
       <div class="sr-only">
         <.link navigate={~p"/products/#{product}"}>Show</.link>

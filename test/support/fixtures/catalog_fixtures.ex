@@ -11,10 +11,12 @@ defmodule SimpleCrud.CatalogFixtures do
     {:ok, product} =
       attrs
       |> Enum.into(%{
-        description: "some description",
         name: "some name",
-        price: "120.5",
-        quantity: 42
+        description: "some description",
+        price: "120.50",
+        quantity: 42,
+        category: "TEST",
+        in_stock: true
       })
       |> SimpleCrud.Catalog.create_product()
 

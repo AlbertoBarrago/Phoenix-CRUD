@@ -8,7 +8,7 @@ defmodule SimpleCrud.CatalogTest do
 
     import SimpleCrud.CatalogFixtures
 
-    @invalid_attrs %{name: nil, description: nil, price: nil, quantity: nil}
+    @invalid_attrs %{name: nil, description: nil, price: nil, quantity: nil,  category: nil , in_stock: nil }
 
     test "list_products/0 returns all products" do
       product = product_fixture()
@@ -21,13 +21,22 @@ defmodule SimpleCrud.CatalogTest do
     end
 
     test "create_product/1 with valid data creates a product" do
-      valid_attrs = %{name: "some name", description: "some description", price: "120.5", quantity: 42}
+      valid_attrs = %{
+        name: "some name",
+        description: "some description",
+        price: "120.50",
+        quantity: 42,
+        category: "TEST",
+        in_stock: true
+      }
 
       assert {:ok, %Product{} = product} = Catalog.create_product(valid_attrs)
       assert product.name == "some name"
       assert product.description == "some description"
-      assert product.price == Decimal.new("120.5")
+      assert product.price == Decimal.new("120.50")
       assert product.quantity == 42
+      assert product.category == "TEST"
+      assert product.in_stock == true
     end
 
     test "create_product/1 with invalid data returns error changeset" do
@@ -36,7 +45,8 @@ defmodule SimpleCrud.CatalogTest do
 
     test "update_product/2 with valid data updates the product" do
       product = product_fixture()
-      update_attrs = %{name: "some updated name", description: "some updated description", price: "456.7", quantity: 43}
+      update_attrs = %{name: "some updated name", description: "some updated description", price: "456.7",
+        quantity: 43, category: "TEST", in_stock: false}
 
       assert {:ok, %Product{} = product} = Catalog.update_product(product, update_attrs)
       assert product.name == "some updated name"
