@@ -9,40 +9,6 @@
 ## Project Overview
 This repository is a study project for SimpleCrud functionality in Phoenix Framework.
 
-## Folder Structure
-
-### [assets](./assets/)
-Contains static assets used by the application, such as images and stylesheets.
-
-### [config](./config/)
-Stores configuration files for the application.
-
-### [deps](./deps/)
-Lists dependencies required by the project.
-
-### [lib](./lib/)
-Holds the main application code.
-
-### [priv](./priv/)
-Private data storage for the application.
-
-### [test](./test/)
-Unit test and integration test folders.
-
-## File Descriptions
-
-### [mix.exs](./mix.exs)
-Project configuration file for Phoenix Framework.
-
-### [mix.lock](./mix.lock)
-File listing dependencies with their corresponding versions.
-
-### [.formatter.exs](./.formatter.exs)
-Configures code formatter settings.
-
-### [.gitignore](./.gitignore)
-Specifies files to ignore during version control.
-
 ## Getting Started
 To run the project, follow these steps:
 
