@@ -7,6 +7,19 @@
 # General application configuration
 import Config
 
+config :simple_crud, :scopes,
+  user: [
+    default: true,
+    module: SimpleCrud.Accounts.Scope,
+    assign_key: :current_scope,
+    access_path: [:user, :id],
+    schema_key: :user_id,
+    schema_type: :id,
+    schema_table: :users,
+    test_data_fixture: SimpleCrud.AccountsFixtures,
+    test_setup_helper: :register_and_log_in_user
+  ]
+
 config :simple_crud,
   ecto_repos: [SimpleCrud.Repo],
   generators: [timestamp_type: :utc_datetime]
