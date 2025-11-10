@@ -1,56 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="en" class="dark"> <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} />
-    <.live_title default="SimpleCrud" suffix=" · Phoenix Framework">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <.live_title default="alBz Blog" suffix=" · Alberto Engineer">
       {assigns[:page_title]}
     </.live_title>
     <link phx-track-static rel="stylesheet" href={~p"/assets/css/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/js/app.js"}>
     </script>
-    <script>
-      (() => {
-        const setTheme = (theme) => {
-          if (theme === "system") {
-            localStorage.removeItem("phx:theme");
-            document.documentElement.removeAttribute("data-theme");
-          } else {
-            localStorage.setItem("phx:theme", theme);
-            document.documentElement.setAttribute("data-theme", theme);
-          }
-        };
-        if (!document.documentElement.hasAttribute("data-theme")) {
-          setTheme(localStorage.getItem("phx:theme") || "system");
-        }
-        window.addEventListener("storage", (e) => e.key === "phx:theme" && setTheme(e.newValue || "system"));
-        
-        window.addEventListener("phx:set-theme", (e) => setTheme(e.target.dataset.phxTheme));
-      })();
-    </script>
-  </head>
-  <body>
-    <ul class="menu menu-horizontal w-full relative z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end">
-      <%= if @current_scope do %>
-        <li>
-          {@current_scope.user.email}
-        </li>
-        <li>
-          <.link href={~p"/users/settings"}>Settings</.link>
-        </li>
-        <li>
-          <.link href={~p"/users/log-out"} method="delete">Log out</.link>
-        </li>
-      <% else %>
-        <li>
-          <.link href={~p"/users/register"}>Register</.link>
-        </li>
-        <li>
-          <.link href={~p"/users/log-in"}>Log in</.link>
-        </li>
-      <% end %>
-    </ul>
+    </head>
+
+<body class="bg-gray-900 text-gray-100 overflow-hidden">
+    <nav class="bg-gray-800 text-gray-200 w-full relative z-10 flex items-center justify-end px-4 sm:px-6 lg:px-8 shadow-md">
+      <ul class="flex items-center gap-4 py-3">
+        <%= if @current_scope do %>
+          <li class="text-sm font-semibold text-indigo-400">
+            {@current_scope.user.email}
+          </li>
+          <li>
+            <.link href={~p"/users/settings"} class="hover:text-indigo-400 transition">Settings</.link>
+          </li>
+          <li>
+            <.link href={~p"/users/log-out"} method="delete" class="hover:text-red-400 transition">Log out</.link>
+          </li>
+        <% else %>
+          <li>
+            <.link href={~p"/users/register"} class="hover:text-indigo-400 transition">Register</.link>
+          </li>
+          <li>
+            <.link href={~p"/users/log-in"} class="font-semibold px-3 py-1 rounded bg-indigo-600 hover:bg-indigo-500 transition">Log in</.link>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+
     {@inner_content}
   </body>
 </html>
