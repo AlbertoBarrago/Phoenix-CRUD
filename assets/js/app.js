@@ -40,6 +40,45 @@ window.addEventListener("phx:page-loading-stop", _info => topbar.hide())
 // connect if there are any LiveViews on the page
 liveSocket.connect()
 
+// Theme toggle handler
+window.addEventListener("phx:set-theme", (e) => {
+    const theme = e.target.dataset.phxTheme;
+    const html = document.documentElement;
+
+    if (theme === "system") {
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        html.setAttribute("data-theme", systemTheme);
+        html.setAttribute("data-theme-selection", "system");
+        localStorage.setItem("theme", "system");
+    } else {
+        html.setAttribute("data-theme", theme);
+        html.setAttribute("data-theme-selection", theme);
+        localStorage.setItem("theme", theme);
+    }
+});
+
+// Load theme on page load
+document.addEventListener("DOMContentLoaded", () => {
+    const savedTheme = localStorage.getItem("theme") || "system";
+    const html = document.documentElement;
+
+    if (savedTheme === "system") {
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        html.setAttribute("data-theme", systemTheme);
+        html.setAttribute("data-theme-selection", "system");
+    } else {
+        html.setAttribute("data-theme", savedTheme);
+        html.setAttribute("data-theme-selection", savedTheme);
+    }
+
+    // Listen for system theme changes when in system mode
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+        if (localStorage.getItem("theme") === "system") {
+            html.setAttribute("data-theme", e.matches ? "dark" : "light");
+        }
+    });
+});
+
 // expose liveSocket on window for web console debug logs and latency simulation:
 // >> liveSocket.enableDebug()
 // >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
